@@ -17,19 +17,26 @@ output date formats, transformations on input dates, and the range of output
 dates per input date.
 
 Dates are in either ISO format (+YYYY-MM-DD+) or basic format (+YYYYMMDD+).
-Each component of a date may include a leading minus sign.  The ISO format
-requires at least one year digit but otherwise permits arbitrary numbers of
-digits per component.  The basic format requires two digits for month and day,
-but permits zero or more year digits.
+The ISO format requires at least one year digit but otherwise permits arbitrary
+numbers of digits per component.  The basic format requires two digits for month
+and day, but permits zero or more year digits.  The +calday+ program also
+accepts a leading minus sign on each component of an ISO or basic format input
+dates.  
 
 By default, +calday+ works with dates in ISO format.
 
 For each input date, +calday+ performs the following steps:
+
 * Normalize to a calendar date.
+
 * Set the date components per options.
+
 * Apply input offsets per options.
+
 * Calculate the date range to print.
+
 * Apply output offsets per options.
+
 * Filter dates per day-of-week constraints.
 
 By default +caldate+ prints all dates in the range.  The +i+ option supports
@@ -109,4 +116,5 @@ corresponding component of the output date and normalizing.
 +-w _weekdays_+::
 Print output only if the output day of week appears in comma-separated list
 +_weekdays_+, where Sunday is day 0.
+
 

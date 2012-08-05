@@ -69,7 +69,7 @@ Compile the documentation:
 package/compile-doc
 !!!!
 
-This creates and populates the +html/+ directory.  It requires
+This creates and populates the +www/+ directory.  It requires
 http://www.methods.co.nz/asciidoc/[asciidoc].  The source files are located in
 +doc/+ and are directly readable.
 

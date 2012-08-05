@@ -16,24 +16,31 @@ read from standard input if the +-f+ option is used.  Options determine the
 input and output datetime formats, transformations on input datetimes, and the
 range of output datetimes per input datetime.
 
-Datetimes are in either ISO format (+YYYY-MM-DDThh:mm:ssXhhmm+) or
-basic format (+YYYYMMDDhhmmss+).  Each component of a datetime may include a
-leading minus sign.  The ISO format requires at least one year digit but
+Datetimes are in either ISO format (+YYYY-MM-DDThh:mm:ss+hhmm+) or basic format
+(+YYYYMMDDhhmmss+).  The ISO format requires at least one year digit but
 otherwise permits arbitrary numbers of digits per component.  Whitespace may
-appear in place of the literal +T+, and before the sign +X+, which is either
+appear in place of the literal +T+, and before the sign +\++, which is either
 +\++ or +-+.  The timezone offset +hhmm+ must consist of four characters, two
 for hours and two for minutes.  The basic format requires two digits for month,
 day, hour, minute, and second, but permits zero or more year digits.  The basic
-format does not support a timezone offset.
+format does not support a timezone offset.  The +caldaytime+ program also
+accepts a leading minus sign on each component of an ISO or basic format input
+datetime.
 
 By default, +caldaytime+ works with dates in ISO format.
 
 For each input datetime, +caldaytime+ performs the following steps:
+
 * Normalize to a calendar datetime.
+
 * Set the datetime components per options.
+
 * Apply input offsets per options.
+
 * Calculate the datetime range to print.
+
 * Apply output offsets per options.
+
 * Filter datetimes per day-of-week constraints.
 
 By default +caldatetime+ prints all datetimes in the range.  The +i+ option

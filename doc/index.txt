@@ -14,7 +14,7 @@ The +calday+ program works with dates in either ISO format
 (+YYYY-MM-DD+) or basic format (+YYYYMMDD+).
 
 The +caldaytime+ program works with dates in either ISO format
-(+YYYY-MM-DDThh:mm:ss\+XXXX+) or basic format (+YYYYMMDDhhmmss+).
+(+YYYY-MM-DDThh:mm:ss+hhmm+) or basic format (+YYYYMMDDhhmmss+).
 
 == License
 Files in this package are in the public domain.

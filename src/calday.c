@@ -175,13 +175,22 @@ int main(int argc,char * const *argv) {
 	  days[u] = 1;
 	}
 	break;
-      case 'W': flagperiod = 1; break;
-      case 'M': flagperiod = 2; break;
-      case 'Y': flagperiod = 3; break;
+      case 'W':
+	flagperiod = 1;
+	flaglimit = 0;
+        break;
+      case 'M':
+	flagperiod = 2;
+	flaglimit = 0;
+        break;
+      case 'Y':
+	flagperiod = 3;
+	flaglimit = 0;
+        break;
       case 'D':
 	flagperiod = 4;
-	scan_ulong(optarg,&range);
 	flaglimit = 0;
+	scan_ulong(optarg,&range);
 	break;
       case 'L':
 	scanday(optarg,&scancd);
@@ -191,23 +200,23 @@ int main(int argc,char * const *argv) {
 	break;
       case 'f': flagfilter = 1; break;
       case 'o':
-	scanday(optarg + scan_plusminus(optarg,&x),&scancd);
-	precd.year += x * scancd.year;
-	precd.month += x * scancd.month;
-	precd.day += x * scancd.day;
+	scanday(optarg,&scancd);
+	precd.year += scancd.year;
+	precd.month += scancd.month;
+	precd.day += scancd.day;
 	break;
       case 'O':
-	scanday(optarg + scan_plusminus(optarg,&x),&scancd);
-	offcd.year += x * scancd.year;
-	offcd.month += x * scancd.month;
-	offcd.day += x * scancd.day;
+	scanday(optarg,&scancd);
+	offcd.year += scancd.year;
+	offcd.month += scancd.month;
+	offcd.day += scancd.day;
 	break;
       case 'i':
 	flaginc = 1;
-	scanday(optarg + scan_plusminus(optarg,&x),&scancd);
-	inccd.year += x * scancd.year;
-	inccd.month += x * scancd.month;
-	inccd.day += x * scancd.day;
+	scanday(optarg,&scancd);
+	inccd.year += scancd.year;
+	inccd.month += scancd.month;
+	inccd.day += scancd.day;
 	break;
       default: usage();
     }
