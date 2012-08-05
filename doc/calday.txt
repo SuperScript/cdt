@@ -1,0 +1,112 @@
+= calday (1)
+:doctype: manpage
+
+== NAME
+calday - print date ranges
+
+== SYNOPSIS
+!!!!
+calday [ -bfBYMW -y _n_ -m _n_ -d _n_ -D _n_ -L _date_ -i _date_ -o _date_ -O _date_ -w _weekdays_ ] [ _date_ ... ]
+!!!!
+
+== DESCRIPTION
+The +calday+ program scans a set of input dates and for each one prints a range
+of output dates.  Input dates appear on the command line, or are read from
+standard input if the +-f+ option is used.  Options determine the input and
+output date formats, transformations on input dates, and the range of output
+dates per input date.
+
+Dates are in either ISO format (+YYYY-MM-DD+) or basic format (+YYYYMMDD+).
+Each component of a date may include a leading minus sign.  The ISO format
+requires at least one year digit but otherwise permits arbitrary numbers of
+digits per component.  The basic format requires two digits for month and day,
+but permits zero or more year digits.
+
+By default, +calday+ works with dates in ISO format.
+
+For each input date, +calday+ performs the following steps:
+* Normalize to a calendar date.
+* Set the date components per options.
+* Apply input offsets per options.
+* Calculate the date range to print.
+* Apply output offsets per options.
+* Filter dates per day-of-week constraints.
+
+By default +caldate+ prints all dates in the range.  The +i+ option supports
+alternative date intervals.
+
+== EXIT STATUS
+The +calday+ program prints a synopsis to standard error and exits 100 for a
+permanent error, and exits 111 for a temporary error.  Otherwise it exits 0.
+
+== OPTIONS
+
+=== INPUT OPTIONS
+Scanning:
+
++-b+::
+Scan input dates in basic format.  Applies to all input dates and also to
+subsequent options that take date arguments.
+
++-f+::
+Read input dates from standard input instead of command line arguments.
+
+Transformation phase 1:
+
++-d _n_+::
+Set the day of each input date to +_n_+.
+This applies only to input dates and not to option arguments.
+
++-m _n_+::
+Set the month of each input date to +_n_+.
+This applies only to input dates and not to option arguments.
+
++-y _n_+::
+Set the year of each input date to +_n_+.
+This applies only to input dates and not to option arguments.
+
+
+Transformation phase 2:
+
++-o _date_+::
+Apply an offset to each input date by adding each date component to the
+corresponding component of the input date.
+
+=== RANGE OPTIONS
+The options +D+, +L+, +M+, +W+, and +Y+ are mutually exclusive.  The last one to
+appear controls.
+
++-D _n_+::
+Set range of +_n_+ days starting with the input date.
+
++-L _date_+::
+Set range starting with the input date and ending with +_date_+.
+The limit date is not included in the range, and is an upper or lower limit
+depending on whether the increment between dates in the range counts up or down.
+
++-M+::
+Set range covering the month containing the input date.
+
++-W+::
+Set range covering the week containing the input date.
+
++-Y+::
+Set range covering the year containing the input date.
+
++-i _date_+::
+Find the next output date in the range by adding each date component to the last
+output date and normalizing.
+
+
+=== OUTPUT OPTIONS
++-B+::
+Use basic format for output dates.
+
++-O _date_+::
+Apply an offset to each output date by adding each date component to the
+corresponding component of the output date and normalizing.
+
++-w _weekdays_+::
+Print output only if the output day of week appears in comma-separated list
++_weekdays_+, where Sunday is day 0.
+

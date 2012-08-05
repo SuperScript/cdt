@@ -1,0 +1,23 @@
+= Introduction
+
+* How to link:install.html[install] cdt
+* The link:calday.html[+calday+] program
+* The link:caldaytime.html[+caldaytime+] program
+
+== What is cdt?
+The cdt package manipulates date and datetime values in standard format.
+The programs support numerous options for printing sequences of dates
+according to various criteria.
+
+== Features
+The +calday+ program works with dates in either ISO format
+(+YYYY-MM-DD+) or basic format (+YYYYMMDD+).
+
+The +caldaytime+ program works with dates in either ISO format
+(+YYYY-MM-DDThh:mm:ss\+XXXX+) or basic format (+YYYYMMDDhhmmss+).
+
+== License
+Files in this package are in the public domain.
+
+The cdt package comes with NO WARRANTY.
+

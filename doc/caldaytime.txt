@@ -1,0 +1,124 @@
+= caldaytime (1)
+:doctype: manpage
+
+== NAME
+caldaytime - print datetime ranges
+
+== SYNOPSIS
+!!!!
+caldaytime [ -bfBYMW -y _n_ -m _n_ -d _n_ -h _n_ -m _n_ -s _n_ -u _n_ -y _n_ -z _n_ -D _n_ -L _datetime_ -i _datetime_ -o _datetime_ -O _date_ -w _weekdays_ ] [ _datetime_ ... ]
+!!!!
+
+== DESCRIPTION
+The +caldaytime+ program scans a set of input datetimes and for each one prints
+a range of output datetimes.  Input datetimes appear on the command line, or are
+read from standard input if the +-f+ option is used.  Options determine the
+input and output datetime formats, transformations on input datetimes, and the
+range of output datetimes per input datetime.
+
+Datetimes are in either ISO format (+YYYY-MM-DDThh:mm:ssXhhmm+) or
+basic format (+YYYYMMDDhhmmss+).  Each component of a datetime may include a
+leading minus sign.  The ISO format requires at least one year digit but
+otherwise permits arbitrary numbers of digits per component.  Whitespace may
+appear in place of the literal +T+, and before the sign +X+, which is either
++\++ or +-+.  The timezone offset +hhmm+ must consist of four characters, two
+for hours and two for minutes.  The basic format requires two digits for month,
+day, hour, minute, and second, but permits zero or more year digits.  The basic
+format does not support a timezone offset.
+
+By default, +caldaytime+ works with dates in ISO format.
+
+For each input datetime, +caldaytime+ performs the following steps:
+* Normalize to a calendar datetime.
+* Set the datetime components per options.
+* Apply input offsets per options.
+* Calculate the datetime range to print.
+* Apply output offsets per options.
+* Filter datetimes per day-of-week constraints.
+
+By default +caldatetime+ prints all datetimes in the range.  The +i+ option
+supports alternative datetime intervals.
+
+== EXIT STATUS
+The +caldaytime+ program prints a synopsis to standard error and exits 100 for a
+permanent error, and exits 111 for a temporary error.  Otherwise it exits 0.
+
+== OPTIONS
+
+=== INPUT OPTIONS
+Scanning:
+
++-b+::
+Scan datetimes in basic format.  Applies to all datetime inputs, including
+subsequent arguments.
+
++-f+::
+Read base datetimes from standard input and not command line.
+
+Transformation phase 1:
+
++-d _n_+::
+Set base datetime day to +_n_+.
+
++-h _n_+::
+Set base datetime hour to +_n_+.
+
++-m _n_+::
+Set base datetime month to +_n_+.
+
++-s _n_+::
+Set base datetime second to +_n_+.
+
++-u _n_+::
+Set base datetime minute to +_n_+.
+
++-y _n_+::
+Set base datetime year to +_n_+.
+
++-z _n_+::
+Set base datetime timezone offset to +_n_+.
+
+Transformation phase 2:
+
++-o _datetime_+::
+Pre-range offset.
+
+=== RANGE OPTIONS
+The options +D+, +L+, +M+, +W+, and +Y+ are mutually exclusive.  The last one to
+appear controls.
+
++-D _n_+::
+Set range of +_n_+ days starting with the input datetime.
+
++-L _datetime_+::
+Set range starting with the input datetime and ending with +_datetime_+.
+The limit datetime is not included in the range, and is an upper or lower limit
+depending on whether the increment between datetimes in the range counts up or
+down.
+
++-M+::
+Set range covering the month containing the input datetime.
+
++-W+::
+Set range covering the week containing the input datetime.
+
++-Y+::
+Set range covering the year containing the input datetime.
+
++-i _datetime_+::
+Find the next output datetime in the range by adding each datetime component to
+the last output datetime and normalizing.
+
+=== OUTPUT OPTIONS
+
++-B+::
+Use basic format for output datetimes.
+
++-O _datetime_+::
+Apply an offset to each output datetime by adding each datetime component to the
+corresponding component of the output datetime and normalizing.
+
++-w _weekdays_+::
+Print output only if ouput day of week appears in comma-separated list
++_weekdays_+, where Sunday is day 0.
+
