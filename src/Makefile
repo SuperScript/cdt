@@ -2,6 +2,7 @@
 default: \
 it
 
+
 alloc.o: \
 default.o.build \
 compile \
@@ -136,6 +137,14 @@ str.h \
 caldate.h
 	sh makefile.build default.o.build caldate_scan.o caldate_scan
 
+calday: \
+default.build \
+calday=x \
+load \
+calday.o \
+unix.a
+	sh makefile.build default.build calday calday
+
 calday.o: \
 default.o.build \
 compile \
@@ -151,6 +160,14 @@ gen_alloc.h \
 stralloc.h \
 getln.h
 	sh makefile.build default.o.build calday.o calday
+
+caldaytime: \
+default.build \
+caldaytime=x \
+load \
+caldaytime.o \
+unix.a
+	sh makefile.build default.build caldaytime caldaytime
 
 caldaytime.o: \
 default.o.build \
@@ -271,6 +288,29 @@ home: \
 home.build
 	sh makefile.build home.build home 
 
+install: \
+default.build
+	sh makefile.build default.build install install
+
+it: \
+default.build \
+it=d \
+calday \
+caldaytime
+	sh makefile.build default.build it it
+
+it.command: \
+default.command.build \
+it \
+it=d
+	sh makefile.build default.command.build it.command it
+
+it.install: \
+default.install.build \
+it.command \
+it=d
+	sh makefile.build default.install.build it.install it
+
 it.rts: \
 default.rts.build \
 it.command
@@ -338,6 +378,12 @@ print-makescrip.sh \
 conf-scrip \
 home
 	sh makefile.build default.build makescrip makescrip
+
+mkfile: \
+mkfile.build \
+mkfile=d \
+it
+	sh makefile.build mkfile.build mkfile 
 
 scan_sign.o: \
 default.o.build \
@@ -518,28 +564,3 @@ tai_add.o \
 tai_sub.o \
 tai_unpack.o
 	sh makefile.build default.a.build unix.a unix
-
-it: \
-default.build \
-it=d \
-calday \
-caldaytime
-	sh makefile.build default.build it it
-
-it.command: \
-default.command.build \
-it \
-it=d
-	sh makefile.build default.command.build it.command it
-
-it.install: \
-default.install.build \
-it.command \
-it=d
-	sh makefile.build default.install.build it.install it
-
-mkfile: \
-mkfile.build \
-mkfile=d \
-it
-	sh makefile.build mkfile.build mkfile 
