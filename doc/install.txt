@@ -30,6 +30,7 @@ rm {package}-{version}.tar
 cd {path}/{package}-{version}
 !!!!
 
+////
 === Installing Under A Working Copy
 
 These instructions describe how to install to run executables from a working
@@ -37,6 +38,7 @@ copy of the repository.
 
 Clone the repository here: https://github.com/SuperScript/{package}[{package}].
 Check out the branch of your choice.
+////
 
 Determine the list of directories to symlink commands into by editing the
 +package/command-ln+ file.  The default is
