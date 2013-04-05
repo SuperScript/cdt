@@ -129,3 +129,5 @@ corresponding component of the output datetime and normalizing.
 Print output only if ouput day of week appears in comma-separated list
 +_weekdays_+, where Sunday is day 0.
 
+== AUTHOR
+William Baxter <sst@superscript.com>
